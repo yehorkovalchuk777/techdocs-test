@@ -1,12 +1,15 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: API
 metadata:
   name: sample-api
   title: Sample API
   description: Sample API catalog entity with TechDocs documentation
+  namespace: ingress-apisix
   annotations:
     backstage.io/techdocs-ref: dir:.
 spec:
-  type: service
+  type: openapi
   lifecycle: experimental
   owner: user:guest
+  definition:
+    $text: ./sample.oas.yaml
