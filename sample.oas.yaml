@@ -14,20 +14,21 @@ info:
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
+servers:
+  - url: http://localhost:8081
+    description: Apisix forwarded server
 paths:
-  /sample:
+  /v1/test:
     get:
-      summary: get sample
-      operationId: findSample
+      summary: test-v1
+      operationId: test
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Sample'
+                type: string
         '404':
           description: sample not found
 components:
