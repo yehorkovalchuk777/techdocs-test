@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: Sample API
+  description: |-
+    This is a sample api based on the OpenAPI 3.1 specification
+
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+paths:
+  /sample:
+    get:
+      summary: get sample
+      operationId: findSample
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sample'
+        '404':
+          description: sample not found
+components:
+  schemas:
+    Sample:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: john
+  securitySchemes:
+    sample_auth:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            write:sample: modify sample
+            read:sample: read sample
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
