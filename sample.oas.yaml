@@ -46,13 +46,9 @@ components:
           type: string
           example: john
   securitySchemes:
-    sample_auth:
-      type: oauth2
-      flows:
-        implicit:
-          scopes:
-            write:sample: modify sample
-            read:sample: read sample
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: /.well-known/openid-configuration
     api_key:
       type: apiKey
       name: api_key
