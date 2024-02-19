@@ -46,10 +46,6 @@ components:
           type: string
           example: john
   securitySchemes:
-    openId:
+    openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
       type: openIdConnect
-      openIdConnectUrl: /.well-known/openid-configuration
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
