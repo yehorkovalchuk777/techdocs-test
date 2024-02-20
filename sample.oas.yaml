@@ -47,6 +47,10 @@ components:
           type: string
           example: john
   securitySchemes:
-    openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
-      type: openIdConnect
-      openIdConnectUrl: http://localhost:8080/realms/dev/.well-known/openid-configuration
+    oauth2:
+      type: oauth2
+      authorizationUrl: http://localhost:8080/auth/realms/dev/protocol/openid-connect/auth
+      flow: implicit
+      scopes:
+        openid: openid
+        profile: profile
