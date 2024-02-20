@@ -50,7 +50,7 @@ components:
     oauth2:
       type: oauth2
       flows:
-        authorizationCode:
+        password:
           authorizationUrl: http://localhost:8080/realms/dev/protocol/openid-connect/auth
         scopes:
           openid: openid
