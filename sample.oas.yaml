@@ -49,8 +49,9 @@ components:
   securitySchemes:
     oauth2:
       type: oauth2
-      authorizationUrl: http://localhost:8080/auth/realms/dev/protocol/openid-connect/auth
-      flow: implicit
-      scopes:
-        openid: openid
-        profile: profile
+      flows:
+        implicit:
+          authorizationUrl: http://localhost:8080/realms/dev/protocol/openid-connect/auth
+        scopes:
+          openid: openid
+          profile: profile
