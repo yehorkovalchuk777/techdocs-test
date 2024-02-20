@@ -16,7 +16,7 @@ externalDocs:
   url: http://swagger.io
 
 servers:
-  - url: http://localhost:8082
+  - url: http://localhost:8081
     description: Apisix forwarded server
 
 paths:
