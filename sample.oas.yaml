@@ -30,7 +30,7 @@ paths:
         '200':
           description: successful operation
           content:
-            application/json:
+            text/plain:
               schema:
                 type: string
   /v2/test:
@@ -43,7 +43,7 @@ paths:
         '200':
           description: successful operation
           content:
-            application/json:
+            text/plain:
               schema:
                 type: string
   /headers:
