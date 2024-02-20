@@ -25,7 +25,7 @@ paths:
       summary: test-v1
       security:
         - openId: []
-      operationId: test
+      operationId: test-v1
       responses:
         '200':
           description: successful operation
@@ -33,8 +33,41 @@ paths:
             application/json:
               schema:
                 type: string
-        '404':
-          description: sample not found
+  /v2/test:
+    get:
+      summary: test-v2
+      security:
+        - openId: []
+      operationId: test-v2
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+  /headers:
+    get:
+      summary: headers
+      security:
+        - openId: []
+      operationId: headers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    headerName:
+                      type: string
+                    headerValues:
+                      type: array
+                      items:
+                        type: string
 components:
   schemas:
     Sample:
