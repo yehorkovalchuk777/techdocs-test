@@ -15,6 +15,10 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 
+servers:
+  - url: http://localhost:8082
+    description: Apisix forwarded server
+
 paths:
   /v1/test:
     get:
@@ -48,7 +52,7 @@ components:
     oauth2:
       type: oauth2
       flows:
-        password:
+        implicit:
           authorizationUrl: http://localhost:8080/realms/dev/protocol/openid-connect/auth
         scopes:
           openid: openid
