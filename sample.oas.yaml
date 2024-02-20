@@ -24,7 +24,7 @@ paths:
     get:
       summary: test-v1
       security:
-        - openId
+        - openId: []
       operationId: test
       responses:
         '200':
