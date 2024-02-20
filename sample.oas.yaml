@@ -23,6 +23,8 @@ paths:
   /v1/test:
     get:
       summary: test-v1
+      security:
+        - openId
       operationId: test
       responses:
         '200':
