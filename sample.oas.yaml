@@ -17,7 +17,7 @@ externalDocs:
 
 servers:
   - url: http://localhost:8081
-    description: Apisix forwarded server
+    description: Apisix API
 
 paths:
   /v1/test:
