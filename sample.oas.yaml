@@ -86,4 +86,4 @@ components:
   securitySchemes:
     openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
       type: openIdConnect
-      openIdConnectUrl: /realms/dev/.well-known/openid-configuration
+      openIdConnectUrl: http://localhost:8081/realms/dev/.well-known/openid-configuration
