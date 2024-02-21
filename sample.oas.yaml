@@ -70,6 +70,6 @@ paths:
                         type: string
 components:
   securitySchemes:
-    openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
+    openId:
       type: openIdConnect
       openIdConnectUrl: http://localhost:8081/realms/dev/.well-known/openid-configuration
