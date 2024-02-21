@@ -16,7 +16,7 @@ externalDocs:
   url: http://swagger.io
 
 servers:
-  - url: http://localhost:8081
+  - url: http://apisix-gateway.ingress-apisix
     description: Apisix API
 
 paths:
