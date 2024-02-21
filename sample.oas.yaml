@@ -69,20 +69,6 @@ paths:
                       items:
                         type: string
 components:
-  schemas:
-    Sample:
-      required:
-        - id
-        - name
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 10
-        name:
-          type: string
-          example: john
   securitySchemes:
     openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
       type: openIdConnect
