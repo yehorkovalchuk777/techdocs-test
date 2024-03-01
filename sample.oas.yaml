@@ -14,11 +14,9 @@ info:
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
-
 servers:
-  - url: http://localhost:8081
+  - url: https://apisix.dev.hgenai.gl/ # change it to Apisix external address after gaining access to dev cluster
     description: Apisix API
-
 paths:
   /v1/test:
     get:
@@ -72,4 +70,4 @@ components:
   securitySchemes:
     openId:
       type: openIdConnect
-      openIdConnectUrl: http://localhost:8081/realms/dev/.well-known/openid-configuration
+      openIdConnectUrl: http://10.6.0.207:8085/auth/realms/dev/.well-known/openid-configuration
