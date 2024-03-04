@@ -18,12 +18,13 @@ externalDocs:
 servers:
   - url: http://10.6.0.209
     description: Apisix API
-  - url: http://10.6.0.207:8085/auth
-    description: Keycloak auth
 
 paths:
   /realms/dev/protocol/openid-connect/token:
     post:
+    servers:
+      - url: http://10.6.0.207:8085/auth
+        description: Keycloak auth
       summary: auth
       operationId: auth
       parameters:
