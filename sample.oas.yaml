@@ -14,9 +14,11 @@ info:
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
+
 servers:
-  - url: https://apisix.dev.hgenai.gl/ # change it to Apisix external address after gaining access to dev cluster
+  - url: http://localhost:8081
     description: Apisix API
+
 paths:
   /v1/test:
     get:
@@ -69,9 +71,5 @@ paths:
 components:
   securitySchemes:
     openId:
-      type: oauth2
-      description: This API uses OAuth 2 with the implicit grant flow. [More info](https://api.example.com/docs/auth)
-      flows:
-        implicit:   # <---- OAuth flow(authorizationCode, implicit, password or clientCredentials)
-          authorizationUrl: http://10.6.0.207:8085/auth/realms/dev/protocol/openid-connect/auth
-          scopes: ["openid", "profile"]
+      type: openIdConnect
+      openIdConnectUrl: http://localhost:8081/realms/dev/.well-known/openid-configuration
