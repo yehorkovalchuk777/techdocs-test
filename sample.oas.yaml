@@ -16,11 +16,11 @@ externalDocs:
   url: http://swagger.io
 
 servers:
-  - url: http://10.6.0.207:8085/auth
+  - url: http://10.6.0.207:8085/
     description: Keycloak auth
 
 paths:
-  /realms/dev/protocol/openid-connect/token:
+  /auth/realms/dev/protocol/openid-connect/token:
     post:
       summary: auth
       operationId: auth
