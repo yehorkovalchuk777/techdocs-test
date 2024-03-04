@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: sample-api
-  title: Sample API
+  name: sample-apiqq
+  title: Test API
   description: Sample API catalog entity with TechDocs documentation
   namespace: ingress-apisix
   annotations:
