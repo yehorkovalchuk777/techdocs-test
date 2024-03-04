@@ -16,7 +16,7 @@ externalDocs:
   url: http://swagger.io
 
 servers:
-  - url: 10.6.0.207:8085/auth
+  - url: http://10.6.0.207:8085/auth
     description: Keycloak auth
 
 paths:
