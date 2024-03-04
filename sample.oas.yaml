@@ -16,7 +16,7 @@ externalDocs:
   url: http://swagger.io
 
 servers:
-  - url: https://apisix.dev.hgenai.gl
+  - url: http://10.6.0.209
     description: Apisix API
   - url: http://10.6.0.207:8085/auth
     description: Keycloak auth
