@@ -67,7 +67,7 @@ paths:
     get:
       summary: test-v1
       security:
-        - openId: []
+        - bearerAuth: []
       operationId: test-v1
       responses:
         '200':
@@ -80,7 +80,7 @@ paths:
     get:
       summary: test-v2
       security:
-        - openId: []
+        - bearerAuth: []
       operationId: test-v2
       responses:
         '200':
@@ -93,7 +93,7 @@ paths:
     get:
       summary: headers
       security:
-        - openId: []
+        - bearerAuth: []
       operationId: headers
       responses:
         '200':
@@ -113,6 +113,7 @@ paths:
                         type: string
 components:
   securitySchemes:
-    openId:
-      type: openIdConnect
-      openIdConnectUrl: http://localhost:8081/realms/dev/.well-known/openid-configuration
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
