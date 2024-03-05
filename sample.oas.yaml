@@ -14,62 +14,15 @@ info:
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
-
 servers:
-  - url: https://apisix.dev.hgenai.gl
+  - url: https://apisix.dev.hgenai.gl # change it to Apisix external address after gaining access to dev cluster
     description: Apisix API
-  - url: http://10.6.0.207:8085/auth
-    description: Keycloak auth
-
 paths:
-  /realms/dev/protocol/openid-connect/token:
-    post:
-      summary: auth
-      operationId: auth
-      parameters:
-        - in: header
-          name: Host
-          schema:
-            type: string
-            default: keycloak-http.keycloak-auth:8085
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                grant_type:
-                  type: string
-                  default: password
-                client_id:
-                  type: string
-                  default: dev-client
-                client_secret:
-                  type: string
-                username:
-                  type: string
-                password:
-                  type: string
-              required:
-                - grant_type
-                - client_id
-                - client_secret
-                - username
-                - password
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/plain:
-              schema:
-                type: string
   /v1/test:
     get:
       summary: test-v1
       security:
-        - bearerAuth: []
+        - openId: []
       operationId: test-v1
       responses:
         '200':
@@ -82,7 +35,7 @@ paths:
     get:
       summary: test-v2
       security:
-        - bearerAuth: []
+        - openId: []
       operationId: test-v2
       responses:
         '200':
@@ -95,7 +48,7 @@ paths:
     get:
       summary: headers
       security:
-        - bearerAuth: []
+        - openId: []
       operationId: headers
       responses:
         '200':
@@ -115,7 +68,6 @@ paths:
                         type: string
 components:
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
