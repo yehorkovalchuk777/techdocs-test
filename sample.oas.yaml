@@ -70,4 +70,4 @@ components:
   securitySchemes:
     openId:
       type: openIdConnect
-      openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
+      openIdConnectUrl: /auth/realms/dev/.well-known/openid-configuration
