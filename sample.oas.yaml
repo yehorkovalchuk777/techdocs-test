@@ -17,12 +17,12 @@ externalDocs:
 servers:
   - url: https://apisix.dev.hgenai.gl # change it to Apisix external address after gaining access to dev cluster
     description: Apisix API
+security:
+  - openId: []
 paths:
   /v1/test:
     get:
       summary: test-v1
-      security:
-        - openId: []
       operationId: test-v1
       responses:
         '200':
@@ -34,8 +34,6 @@ paths:
   /v2/test:
     get:
       summary: test-v2
-      security:
-        - openId: []
       operationId: test-v2
       responses:
         '200':
@@ -47,8 +45,6 @@ paths:
   /headers:
     get:
       summary: headers
-      security:
-        - openId: []
       operationId: headers
       responses:
         '200':
