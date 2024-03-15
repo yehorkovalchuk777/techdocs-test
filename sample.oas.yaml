@@ -24,7 +24,7 @@ servers:
 security:
   - bearerAuth: [ ]
 paths:
-  /auth/realms/dev/protocol/openid-connect/token:
+  https://apisix.dev.hgenai.gl/auth/realms/dev/protocol/openid-connect/token:
     post:
       summary: Authorize [DEV]
       operationId: auth
@@ -43,7 +43,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  /auth/realms/qa/protocol/openid-connect/token:
+  https://apisix.qa.hgenai.gl/auth/realms/qa/protocol/openid-connect/token:
     post:
       summary: Authorize [QA]
       operationId: auth
