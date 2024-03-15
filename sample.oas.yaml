@@ -26,7 +26,7 @@ security:
 paths:
   /auth/realms/dev/protocol/openid-connect/token:
     post:
-      summary: Authorize
+      summary: Authorize [DEV]
       operationId: auth
       tags:
         - Authorization
@@ -35,38 +35,33 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: object
-              properties:
-                grant_type:
-                  type: string
-                  default: password
-                client_id:
-                  type: string
-                  default: dev-client
-                client_secret:
-                  type: string
-                  format: password
-                username:
-                  type: string
-                password:
-                  type: string
-                  format: password
-              required:
-                - grant_type
-                - client_id
-                - client_secret
-                - username
-                - password
+              $ref: '#/components/schemas/KeycloakLoginRequest'
       responses:
         '200':
           description: successful operation
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                properties:
-                  access_token:
-                    type: string
+                type: string
+  /auth/realms/qa/protocol/openid-connect/token:
+    post:
+      summary: Authorize [QA]
+      operationId: auth
+      tags:
+        - Authorization
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/KeycloakLoginRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
   /v1/test:
     get:
       summary: test-v1
@@ -116,6 +111,29 @@ paths:
                       items:
                         type: string
 components:
+  schemas:
+    KeycloakLoginRequest:
+      type: object
+      properties:
+        grant_type:
+          type: string
+          default: password
+        client_id:
+          type: string
+        client_secret:
+          type: string
+          format: password
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+      required:
+        - grant_type
+        - client_id
+        - client_secret
+        - username
+        - password
   securitySchemes:
     bearerAuth:
       type: http
