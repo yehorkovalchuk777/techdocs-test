@@ -61,9 +61,12 @@ paths:
         '200':
           description: successful operation
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                type: object
+                properties:
+                  access_token:
+                    type: string
   /v1/test:
     get:
       summary: test-v1
