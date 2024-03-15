@@ -115,5 +115,6 @@ paths:
 components:
   securitySchemes:
     bearerAuth:
-      type: openIdConnect
-      openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
