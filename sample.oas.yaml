@@ -22,12 +22,54 @@ servers:
   - url: http://localhost:8081
     description: Apisix local API
 security:
-  - openId: []
+  - bearerAuth: []
 paths:
+  /auth/realms/dev/protocol/openid-connect/token:
+    get:
+      summary: Authorize
+      operationId: auth
+      tags:
+        - Authorization
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  default: password
+                client_id:
+                  type: string
+                  default: dev
+                client_secret:
+                  type: string
+                  format: password
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+                - username
+                - password
+        responses:
+          '200':
+            description: successful operation
+            content:
+              text/plain:
+                schema:
+                  type: string
   /v1/test:
     get:
       summary: test-v1
       operationId: test-v1
+      tags:
+        - API
       responses:
         '200':
           description: successful operation
@@ -39,6 +81,8 @@ paths:
     get:
       summary: test-v2
       operationId: test-v2
+      tags:
+        - API
       responses:
         '200':
           description: successful operation
@@ -50,6 +94,8 @@ paths:
     get:
       summary: headers
       operationId: headers
+      tags:
+        - API
       responses:
         '200':
           description: successful operation
@@ -68,6 +114,6 @@ paths:
                         type: string
 components:
   securitySchemes:
-    openId:
+    bearerAuth:
       type: openIdConnect
-      openIdConnectUrl: /auth/realms/dev/.well-known/openid-configuration
+      openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
