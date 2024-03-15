@@ -25,7 +25,7 @@ security:
   - bearerAuth: []
 paths:
   /auth/realms/dev/protocol/openid-connect/token:
-    get:
+    post:
       summary: Authorize
       operationId: auth
       tags:
