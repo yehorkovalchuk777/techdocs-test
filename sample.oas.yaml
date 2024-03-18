@@ -52,15 +52,6 @@ paths:
       summary: Get user chat sessions
       description: Retrieve the list of chat sessions associated to a user
       operationId: getChatSessions
-      parameters:
-        - name: version
-          in: path
-          description: Requested version of the API in fornmat vN
-          required: true
-          explode: true
-          schema:
-            type: string
-            default: available
       responses:
         '200':
           description: Successful operation
@@ -77,14 +68,6 @@ paths:
         - chat-sessions
       summary: Create chat session
       description: Creates new chat session for a specific user
-      parameters:
-        - name: version
-          in: path
-          description: Requested version of the API in fornmat vN
-          required: true
-          explode: true
-          schema:
-            type: string
       requestBody:
         description: Provided payload for session creation
         content:
@@ -111,14 +94,6 @@ paths:
       description: Modify a chat session specific to a user
       operationId: updateChatSessions
       parameters:
-        - name: version
-          in: path
-          description: Requested version of the API in fornmat vN
-          required: true
-          explode: true
-          schema:
-            type: string
-            default: available
         - name: session_id
           in: path
           description: Requested chat session
@@ -144,13 +119,6 @@ paths:
       summary: Create chat session
       description: Creates new chat session for a specific user
       parameters:
-        - name: version
-          in: path
-          description: Requested version of the API in fornmat vN
-          required: true
-          explode: true
-          schema:
-            type: string
         - name: session_id
           in: path
           description: Requested chat session
@@ -189,14 +157,6 @@ paths:
       description: Retrieve the list of chat session messages
       operationId: getChatSessionMessages
       parameters:
-        - name: version
-          in: path
-          description: Requested version of the API in fornmat vN
-          required: true
-          explode: true
-          schema:
-            type: string
-            default: available
         - name: session_id
           in: path
           description: Requested chat session
@@ -227,14 +187,6 @@ paths:
       description: Clear the
       operationId: deleteChatSessionMessages
       parameters:
-        - name: version
-          in: path
-          description: Requested version of the API in fornmat vN
-          required: true
-          explode: true
-          schema:
-            type: string
-            default: available
         - name: session_id
           in: path
           description: Requested chat session
