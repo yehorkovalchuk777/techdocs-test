@@ -22,8 +22,8 @@ servers:
   - url: http://localhost:8081
     description: Apisix local API
 security:
-  - openIdDev: []
-  - openIdQa: []
+  - OIDC-DEV: []
+  - OIDC-QA: []
 paths:
   /v1/test:
     get:
@@ -69,9 +69,9 @@ paths:
                         type: string
 components:
   securitySchemes:
-    openIdDev:
+    OIDC-DEV:
       type: openIdConnect
       openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
-    openIdQa:
+    OIDC-QA:
       type: openIdConnect
-      openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/genai/.well-known/openid-configuration
+      openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/qa/.well-known/openid-configuration
