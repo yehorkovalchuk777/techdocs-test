@@ -1,9 +1,8 @@
 openapi: 3.1.0
 info:
-  title: Sample API
+  title: User Session Hub API
   description: |-
-    This is a sample api based on the OpenAPI 3.1 specification
-
+    User Session Hub API based on the OpenAPI 3.1 specification
   termsOfService: http://swagger.io/terms/
   contact:
     email: apiteam@swagger.io
@@ -25,49 +24,593 @@ security:
   - OIDC-DEV: []
   - OIDC-QA: []
 paths:
-  /v1/test:
-    get:
-      summary: test-v1
-      operationId: test-v1
+  /v2/chat/completions:
+    post:
+      summary: >-
+        Returns result of LLM inference on the given query (with optional use of
+        the knowledge database)
+      operationId: chat_completion
+      tags:
+        - completions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionRequest'
+        required: true
       responses:
         '200':
-          description: successful operation
-          content:
-            text/plain:
-              schema:
-                type: string
-  /v2/test:
-    get:
-      summary: test-v2
-      operationId: test-v2
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/plain:
-              schema:
-                type: string
-  /headers:
-    get:
-      summary: headers
-      operationId: headers
-      responses:
-        '200':
-          description: successful operation
+          description: Successful Response
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    headerName:
-                      type: string
-                    headerValues:
-                      type: array
-                      items:
-                        type: string
+                $ref: '#/components/schemas/ChatCompletionResponse'
+  /v1/chats/sessions:
+    get:
+      tags:
+        - chat-sessions
+      summary: Get user chat sessions
+      description: Retrieve the list of chat sessions associated to a user
+      operationId: getChatSessions
+      parameters:
+        - name: version
+          in: path
+          description: Requested version of the API in fornmat vN
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: available
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChatSessionsResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      tags:
+        - chat-sessions
+      summary: Create chat session
+      description: Creates new chat session for a specific user
+      parameters:
+        - name: version
+          in: path
+          description: Requested version of the API in fornmat vN
+          required: true
+          explode: true
+          schema:
+            type: string
+      requestBody:
+        description: Provided payload for session creation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChatSessionRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /v1/chats/sessions/{session_id}:
+    delete:
+      tags:
+        - chat-sessions
+      summary: Update chat session
+      description: Modify a chat session specific to a user
+      operationId: updateChatSessions
+      parameters:
+        - name: version
+          in: path
+          description: Requested version of the API in fornmat vN
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: available
+        - name: session_id
+          in: path
+          description: Requested chat session
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: available
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Invalid session id provided
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Invalid url
+    patch:
+      tags:
+        - chat-sessions
+      summary: Create chat session
+      description: Creates new chat session for a specific user
+      parameters:
+        - name: version
+          in: path
+          description: Requested version of the API in fornmat vN
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          description: Requested chat session
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: available
+      requestBody:
+        description: Provided payload for session creation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChatSessionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '400':
+          description: Invalid session id provided
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Invalid url
+  /v1/chats/sessions/{session_id}/messages:
+    get:
+      tags:
+        - chat-sessions
+      summary: Get user chat session messages
+      description: Retrieve the list of chat session messages
+      operationId: getChatSessionMessages
+      parameters:
+        - name: version
+          in: path
+          description: Requested version of the API in fornmat vN
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: available
+        - name: session_id
+          in: path
+          description: Requested chat session
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: available
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChatSessionMessagesResponse'
+        '400':
+          description: Invalid session id provided
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Invalid url
+    delete:
+      tags:
+        - chat-sessions
+      summary: Delete chat session messages
+      description: Clear the
+      operationId: deleteChatSessionMessages
+      parameters:
+        - name: version
+          in: path
+          description: Requested version of the API in fornmat vN
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: available
+        - name: session_id
+          in: path
+          description: Requested chat session
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: available
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Invalid session id provided
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Invalid url
 components:
+  schemas:
+    ChatCompletionRequest:
+      type: object
+      properties:
+        query:
+          description: The query from the client app
+          type: string
+          example: Show me mounthly income in the form of table for the last quater
+        session_id:
+          description: >-
+            Unique identifier of the user session. Could be used to track the
+            user's history
+          type: string
+          format: uuid
+        rag_config:
+          $ref: '#/components/schemas/RAGConfig'
+        prompt_config:
+          $ref: "#/components/schemas/PromptConfig"
+        model_settings:
+          $ref: '#/components/schemas/ModelSettings'
+      required:
+        - query
+    ChatCompletionResponse:
+      type: object
+      properties:
+        completion:
+          description: Response from the GroundingHub
+          type: string
+          example: >-
+            Sure, here is incomes for the last 4 three for the Hitach GenAI
+            Platform project: ...
+        documents:
+          description: Documents, retrieved by RAG
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+      required:
+        - completion
+    Error:
+      type: object
+      properties:
+        code:
+          description: >-
+            Error code. Could be used by the client app to handle the error
+            properly
+          type: string
+          example: 400
+        message:
+          description: >-
+            Error message. Could be used by the client app to handle the error
+            properly
+          type: string
+          example: Invalid request
+    RAGConfig:
+      type: object
+      properties:
+        document_tags:
+          description: >-
+            List of tags to filter the documents from the knowledge database.
+            If not set or ```null``` then all allowed documents will be used.
+          type: array
+          items:
+            type: string
+          nullable: true
+          example:
+            - public
+            - financial
+            - hitachi-genai-platform
+      required:
+        - role
+        - content
+    PromptConfig:
+      type: object
+      properties:
+        template_id:
+          description: >-
+            ID of the template required to be used to build prompt
+          type: string
+        input_variables:
+          description: >-
+            Dictionary (key => value) of variables to be bind with the
+            template
+          type: object
+          nullable: true
+          additionalProperties:
+            type: string
+          example:
+            speciality: "computer engineer"
+            age: "34"
+          default: null
+    ModelParams:
+      type: object
+      properties:
+        temperature:
+          description: >-
+            Temperature value for the top-p sampling. The higher the value, the
+            more random the output. Lower values leads to generation of
+            more focused and deterministic completions. It is suggested to
+            alter this of ```top_p```, but not both.
+            If not set or ```null``` then the default value for the
+            corresponding model will be used.
+          type: number
+          nullable: true
+          minimum: 0
+          maximum: 2
+          default: null
+          example: 0.9
+        top_p:
+          description: >-
+            Sample from tokens with ```top_p``` probability mass,
+            e.g. 0.2 means only the tokens comprising the
+            top 20% probability mass are considered, while 1.0
+            means all tokens will be considered. The higher the
+            value, the more random the output.
+            If not set or ```null``` then the default value for
+            the corresponding ```model``` will be used.
+            It is suggested to alter this of ```temperature```,
+            but not both.
+          type: number
+          nullable: true
+          minimum: 0
+          maximum: 1
+          default: null
+          example: 0.1
+        max_tokens:
+          description: >-
+            Maximum number of tokens to generate. The higher the value, the more
+            random the output. The total length of input tokens and generated
+            tokens is limited by the model's context length. Zero value means max
+            possible number of tokens.
+          type: integer
+          minimum: 0
+          default: 16
+          example: 100
+        stop:
+          description: >-
+            Sequences or list of sequences where the API will stop generating further tokens. The supported number of sequences depends on the model.
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          nullable: true
+          default: null
+          example: [ 'stop', '\n', 'user:' ]
+    ModelSettings:
+      type: object
+      properties:
+        model:
+          description: ID of the model to use for inference
+          type: string
+          example: hitachi-genai-platform/HGP-7b-instruct
+        params:
+          $ref: '#/components/schemas/ModelParams'
+      required:
+        - model
+    Position:
+      type: object
+      description: Position of the current data in the original document
+      properties:
+        offset:
+          description: >-
+            Offset of the current data from the beginning of the
+            original document. Units depends on the document type,
+            e.g. could be characters for text documents
+          type: integer
+          minimum: 0
+          example: 1233
+        length:
+          description: >-
+            Length of the data. Units depends on the document
+            type, e.g. could be characters for text documents
+          type: integer
+          minimum: 0
+          example: 354
+      required:
+        - offset
+        - length
+    Author:
+      description: Information about document author
+      type: object
+      properties:
+        name:
+          description: Author name
+          type: string
+        email:
+          description: Contact e-mail
+          type: string
+          format: email
+      required:
+        - name
+    DocumentMetadata:
+      type: object
+      description: Information about the source document and the current data
+      properties:
+        source_mime_type:
+          description: Type of the source document, e.g., application/pdf, text/csv, application/vnd.youtube.yt (see https://www.iana.org/assignments/media-types/media-types.xhtml)
+          type: string
+          example: application/pdf
+        title:
+          description: Title of the document, if available
+          type: string
+          example: Quater financial report
+        authors:
+          description: >-
+            List of authors of the document
+          type: array
+          items:
+            $ref: "#/components/schemas/Author"
+        mime_type:
+          description: Type of the data, e.g., text/plain, video/3gpp, image/png (see https://www.iana.org/assignments/media-types/media-types.xhtml)
+          type: string
+          example: text/plain
+        url:
+          description: URL to the original document
+          type: string
+          format: uri
+          example: >-
+            https://hitachi-doc.com/public/reports/879asjalsasf9913.pdf
+        created:
+          description: >-
+            Source document creation date-time. the date-time notation as defined by RFC 3339, section 5.6, for example, 2023-07-21T17:32:28Z
+          type: string
+          format: date-time
+          example: 2023-07-21T17:32:28Z
+        tags:
+          description: >-
+            List of tags assigned to the source document (see ```RAGConfig.document_tags```).
+          type: array
+          items:
+            type: string
+          example:
+            - public
+            - financial
+            - hitachi-genai-platform
+        position:
+          $ref: '#/components/schemas/Position'
+      anyOf:
+        - required:
+            - title
+            - url
+        - required:
+            - title
+            - url
+            - position
+            - mime_type
+    Document:
+      description: Document, retrieved by RAG
+      type: object
+      properties:
+        similarity:
+          description: >-
+            Similarity value between the user request and current data. Could be
+            interpreted as relevance for some cases
+          type: number
+          minimum: 0
+          maximum: 1
+          default: 0
+          example: 0.97
+        metadata:
+          $ref: '#/components/schemas/DocumentMetadata'
+        content:
+          type: object
+          description: >-
+            Optional document content. The type depends on the data type, and can
+            be string for text data or binary for files
+          oneOf:
+            - type: string
+            - type: string
+              format: binary
+          example: Here some data extracted from the document...
+      required:
+        - metadata
+    GetChatSessionsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChatSession'
+    CreateChatSessionRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+          default: active
+        session_id:
+          type: string
+          format: uuid
+      required:
+        - name
+        - status
+        - session_id
+    UpdateChatSessionRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+    ChatSession:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+        session_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    GetChatSessionMessagesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChatSessionMessage'
+    GetChatMessagesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatSessionMessage'
+        links:
+          $ref: '#/components/schemas/Links'
+    ChatSessionMessage:
+      type: object
+      properties:
+        role:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Links:
+      type: array
+      items:
+        type: object
+        properties:
+          rel:
+            type: string
+            enum:
+              - first
+              - last
+              - prev
+              - next
+          href:
+            type: string
+            format: url
   securitySchemes:
     OIDC-DEV:
       type: openIdConnect
