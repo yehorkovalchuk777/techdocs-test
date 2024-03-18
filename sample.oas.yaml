@@ -73,4 +73,4 @@ components:
       openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
     openIdQa:
       type: openIdConnect
-      openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/qa/.well-known/openid-configuration
+      openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/genai/.well-known/openid-configuration
