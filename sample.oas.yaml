@@ -23,6 +23,7 @@ servers:
     description: Apisix local API
 security:
   - openIdDev: []
+  - openIdQa: []
 paths:
   /v1/test:
     get:
