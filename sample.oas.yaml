@@ -22,52 +22,12 @@ servers:
   - url: http://localhost:8081
     description: Apisix local API
 security:
-  - bearerAuth: [ ]
+  - openIdDev: []
 paths:
-  /auth/realms/dev/protocol/openid-connect/token:
-    post:
-      summary: Authorize [DEV]
-      operationId: auth
-      tags:
-        - Authorization
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/KeycloakLoginRequest'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/plain:
-              schema:
-                type: string
-  /auth/realms/qa/protocol/openid-connect/token:
-    post:
-      summary: Authorize [QA]
-      operationId: auth
-      tags:
-        - Authorization
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/KeycloakLoginRequest'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            text/plain:
-              schema:
-                type: string
   /v1/test:
     get:
       summary: test-v1
       operationId: test-v1
-      tags:
-        - API
       responses:
         '200':
           description: successful operation
@@ -79,8 +39,6 @@ paths:
     get:
       summary: test-v2
       operationId: test-v2
-      tags:
-        - API
       responses:
         '200':
           description: successful operation
@@ -92,8 +50,6 @@ paths:
     get:
       summary: headers
       operationId: headers
-      tags:
-        - API
       responses:
         '200':
           description: successful operation
@@ -111,31 +67,10 @@ paths:
                       items:
                         type: string
 components:
-  schemas:
-    KeycloakLoginRequest:
-      type: object
-      properties:
-        grant_type:
-          type: string
-          default: password
-        client_id:
-          type: string
-        client_secret:
-          type: string
-          format: password
-        username:
-          type: string
-        password:
-          type: string
-          format: password
-      required:
-        - grant_type
-        - client_id
-        - client_secret
-        - username
-        - password
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+    openIdDev:
+      type: openIdConnect
+      openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
+    openIdQa:
+      type: openIdConnect
+      openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/qa/.well-known/openid-configuration
