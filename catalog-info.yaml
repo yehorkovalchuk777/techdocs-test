@@ -6,7 +6,7 @@ metadata:
   description: Sample API catalog entity with TechDocs documentation
   namespace: ingress-apisix
   annotations:
-    backstage.io/techdocs-ref: dir:./docs
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: openapi
   lifecycle: experimental
