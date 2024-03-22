@@ -10,4 +10,4 @@ metadata:
 spec:
   type: openapi
   lifecycle: experimental
-  owner: user:guest
+  owner: genai
