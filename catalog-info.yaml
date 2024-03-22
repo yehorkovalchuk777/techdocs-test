@@ -10,6 +10,6 @@ metadata:
 spec:
   type: openapi
   lifecycle: experimental
-  owner: genai
+  owner: org/genai
   definition:
     $text: ./api.oas.yaml
