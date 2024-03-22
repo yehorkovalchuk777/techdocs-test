@@ -1,13 +1,15 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: API
 metadata:
-  name: sample-apiqq
-  title: Test API
-  description: Sample API catalog entity with TechDocs documentation
-  namespace: ingress-apisix
+  name: prompt-management-api
+  title: Prompt Management API
+  description: Prompt Management API catalog entity with TechDocs documentation
+  namespace: backstage
   annotations:
     backstage.io/techdocs-ref: dir:.
 spec:
   type: openapi
   lifecycle: experimental
-  owner: genai
+  owner: abc/abc
+  definition:
+    $text: ./api.oas.yaml
