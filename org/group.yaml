@@ -2,6 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: genai
+  namespace: ingress-apisix
 spec:
   type: team
   profile:
