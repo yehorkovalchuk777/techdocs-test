@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: prompt-management-api
-  title: Prompt Management API
+  title: Test API
   description: Prompt Management API catalog entity with TechDocs documentation
   namespace: ingress-apisix
   annotations:
