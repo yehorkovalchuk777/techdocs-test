@@ -13,7 +13,7 @@ security:
   - OIDC-DEV: []
   - OIDC-QA: []
 paths:
-  /metadata:
+  /v1/metadata:
     get:
       summary: Get a list of distinct metadata
       operationId: getMetadata
@@ -35,7 +35,7 @@ paths:
                 application/json:
                     schema:
                         $ref: '#/components/schemas/errorMessage'
-  /metadata/tags:
+  /v1/metadata/tags:
     get:
       summary: Get a list of distinct tags
       operationId: getTags
@@ -81,7 +81,7 @@ components:
   securitySchemes:
     OIDC-DEV:
       type: openIdConnect
-      openIdConnectUrl: https://internal.keycloak.dev.hgenai.gl:8085/auth/realms/dev/.well-known/openid-configuration
+      openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
     OIDC-QA:
       type: openIdConnect
       openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/genai/.well-known/openid-configuration
