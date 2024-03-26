@@ -74,7 +74,7 @@ components:
   securitySchemes:
     OIDC-DEV:
       type: openIdConnect
-      openIdConnectUrl: https://internal.keycloak.dev.hgenai.gl:8085/auth/realms/dev/.well-known/openid-configuration
+      openIdConnectUrl: http://internal.keycloak.dev.hgenai.gl:8085/auth/realms/dev/.well-known/openid-configuration
     OIDC-QA:
       type: openIdConnect
       openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/genai/.well-known/openid-configuration
