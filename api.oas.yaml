@@ -2,6 +2,13 @@ openapi: 3.0.0
 info:
   title: ContentHub API specification
   version: 1.0.0
+servers:
+  - url: https://apisix.dev.hgenai.gl
+    description: Apisix API
+  - url: https://apisix.qa.hgenai.gl
+    description: Apisix API
+  - url: http://localhost:8081
+    description: Apisix local API
 security:
   - OIDC-DEV: []
   - OIDC-QA: []
@@ -74,7 +81,7 @@ components:
   securitySchemes:
     OIDC-DEV:
       type: openIdConnect
-      openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
+      openIdConnectUrl: https://internal.keycloak.dev.hgenai.gl:8085/auth/realms/dev/.well-known/openid-configuration
     OIDC-QA:
       type: openIdConnect
       openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/genai/.well-known/openid-configuration
