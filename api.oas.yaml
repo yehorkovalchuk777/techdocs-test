@@ -82,8 +82,10 @@ components:
     OIDC-DEV:
       type: openIdConnect
       openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
-      grant_types_supported: ["password"]
+      openIdConnectData:
+        grant_types_supported: ["password"]
     OIDC-QA:
       type: openIdConnect
       openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/genai/.well-known/openid-configuration
-      grant_types_supported: ["password"]
+      openIdConnectData:
+        grant_types_supported: ["password"]
