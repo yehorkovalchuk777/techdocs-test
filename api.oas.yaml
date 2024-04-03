@@ -82,10 +82,6 @@ components:
     OIDC-DEV:
       type: openIdConnect
       openIdConnectUrl: https://apisix.dev.hgenai.gl/auth/realms/dev/.well-known/openid-configuration
-      openIdConnectData:
-        grant_types_supported: ["password"]
     OIDC-QA:
       type: openIdConnect
-      openIdConnectUrl: https://apisix.qa.hgenai.gl/auth/realms/genai/.well-known/openid-configuration
-      openIdConnectData:
-        grant_types_supported: ["password"]
+      openIdConnectUrl: https://keycloak.qa.hitachi-ai.io/auth/realms/genai/.well-known/openid-configuration
