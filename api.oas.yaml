@@ -5,7 +5,7 @@ info:
 servers:
   - url: https://apisix.dev.hgenai.gl
     description: Apisix API
-  - url: https://apisix.qa.hgenai.gl
+  - url: https://apisix.qa.hitachi-ai.io
     description: Apisix API
   - url: http://localhost:8081
     description: Apisix local API
