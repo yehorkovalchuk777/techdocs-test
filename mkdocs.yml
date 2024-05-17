@@ -1,6 +1,5 @@
 site_name: 'Sample API documentation'
 repo_url: https://github.com/yehorkovalchuk777/techdocs-test
-edit_uri: edit/main/docs
 
 nav:
   - Home: index.md
