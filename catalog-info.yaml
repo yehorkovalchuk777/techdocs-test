@@ -11,5 +11,6 @@ spec:
   type: openapi
   lifecycle: experimental
   owner: org/genai
+  repoUrl: https://github.com/yehorkovalchuk777/techdocs-test
   definition:
     $text: ./api.oas.yaml
